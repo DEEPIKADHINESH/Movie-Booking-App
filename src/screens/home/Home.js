@@ -7,7 +7,7 @@ import { GridList } from '@material-ui/core';
 import ReactDOM from"react-dom";
 import "./Home.css";
 import { withStyles } from '@material-ui/core/styles';
-import  { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import  { Theme, createStyles,  } from "@material-ui/core/styles";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import genres from "../../common/genre";
 import artists from  "../../common/artists";
+import Details from '../details/Details.js';
 
 const styles = theme => ({
   root: {
