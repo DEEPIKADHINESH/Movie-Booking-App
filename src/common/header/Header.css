@@ -5,7 +5,7 @@
     padding-bottom: 8px;
     padding-left: 16px;
     padding-right: 32px;
-    position: absolute;
+    position: relative;
     width:100%;
 }
 #logo{
@@ -13,20 +13,13 @@
     height:35px;
     align-items: left;
     animation: name 8s linear infinite;
-    position: fixed;
+    position: relative;
     }
     @keyframes name {
-        100%{transform: rotate(360deg);}
-    }
-.upcoming-movies{
-    background-color: #ff9999;
-    width: 100%;
-    padding:8px;
-    text-align: center;
-    font-size:  1rem;
-   align-items: center;
-    justify-content: center;
-   margin-top: 7vh;
-    position: absolute;
-     left: 0px;
-}
+        from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
