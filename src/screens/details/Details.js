@@ -5,12 +5,13 @@ import moviesData from "../../common/moviesData";
 import Typography from "@material-ui/core/Typography";
 import "./Details.css";
 import Home from "../home/Home";
-import YouTubeIcon from '@material-ui/icons/YouTube';
+//import YouTubeIcon from '@material-ui/icons/YouTube';
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Button from "@material-ui/core/Button";
+import YouTube from "react-youtube";
 class Details extends Component {
   constructor() {
     super();
@@ -92,7 +93,7 @@ class Details extends Component {
           BOOK SHOW{" "}
         </Button>
         <div className="back">
-          <Typography onClick={this.backToHomeHandler}>
+          <Typography onClick={this.backToHomeHandler}> 
             &#60; Back to Home
           </Typography>
         </div>
@@ -138,7 +139,7 @@ class Details extends Component {
               <Typography>
                 <span className="bold">Trailer:</span>
               </Typography>
-              <YouTubeIcon
+              < YouTube
 
                 videoId={movie.trailer_url.split("?v=")[1]}
                 opts={opts}
