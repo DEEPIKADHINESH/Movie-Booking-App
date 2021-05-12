@@ -71,7 +71,52 @@ class Home extends Component {
       releaseDateEnd: ""
     }
   }
+  componentDidMount(){
+    //to know the upcoming movies
+    fetch(
+      "http://localhost:8085/api/v1/movies?page=1&limit=10&status=published",
+      { method: "GET" }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          upcomingMovies: data.movies,
+        });
+      });
+      //to get released movies list
+      fetch(
+        "http://localhost:8085/api/v1/movies?page=1&limit=10&status=Released",
+        { method: "GET" }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState({
+            releasedMovies: data.movies,
+          });
+        });
+  // Get filters
 
+  fetch("http://localhost:8085/api/v1/genres", { method: "GET" })
+  .then((response) => response.json())
+  .then((data) => {
+    this.setState({
+      genresList: data.genres,
+    });
+  });
+
+// Get artists
+
+fetch("http://localhost:8085/api/v1/artists?page=1&limit=10", {
+  method: "GET",
+})
+  .then((response) => response.json())
+  .then((data) => {
+    this.setState({
+      artistsList: data.artists,
+    });
+  });
+}
+ 
   movieNameChangeHandler = event => {
     this.setState({ movieName: event.target.value });
   }
@@ -94,8 +139,18 @@ class Home extends Component {
 
   movieClickHandler = (movieId) => {
     ReactDOM.render(<Details movieId={movieId} />, document.getElementById('root'));
-  }
-  render() {
+    fetch( "http://localhost:8085/api/v1/movies?page=1&limit=10", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+            releasedMovies: data.movies,
+        });
+      });
+  };
+
+render() {
     const { classes } = this.props;
     var filterMovie = moviesData.filter((movie) => {
       return (movie.title === this.state.movieName || this.state.artists.includes((movie.artists[0].first_name + " " + movie.artists[0].last_name)))

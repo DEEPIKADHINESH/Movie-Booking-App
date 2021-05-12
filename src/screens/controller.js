@@ -13,14 +13,11 @@ class Controller extends Component {
     return (
       <Router>
         <div className="main-container">
-        <Route exact path='/' render={(props) => <Home {...props} movieData={moviesData} />} />
-          <Route path='/movie/:id' render={(props) => <Details {...props}  />} />
-          <Route path='/bookshow/:id' render={(props) => <BookShow {...props}  />} />
-          <Route path='/confirm/:id' render={(props) => <Confirmation {...props} />} />
-          <Route exact path='/' render={(props) => <Home {...props} movieData={moviesData} />} />
-          <Route path='/movie/:id' render={(props) => <Details {...props}  />} />
-          <Route path='/bookshow/:id' render={(props) => <BookShow {...props}  />} />
-          <Route path='/confirm/:id' render={(props) => <Confirmation {...props} />} />
+        <Route exact path='/' render={(props) => <Home {...props} baseURL={this.baseURL} />} />
+          <Route path='/movie/:id' render={(props) => <Details {...props} baseURL={this.baseURL}  />} />
+          <Route path='/bookshow/:id' render={(props) => <BookShow {...props}  baseURL={this.baseURL} />} />
+          <Route path='/confirm/:id' render={(props) => <Confirmation {...props} baseURL={this.baseURL}/>} />
+    
         </div>
       </Router>
     )

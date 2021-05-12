@@ -91,8 +91,36 @@ constructor() {
     this.state.loginPassword === ""
       ? this.setState({ loginPasswordRequired: "dispBlock" })
       : this.setState({ loginPasswordRequired: "dispNone" });
-  
-    };
+    
+    let dataLogin = null;
+    let xhrLogin = new XMLHttpRequest();
+    let that = this;
+    xhrLogin.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        sessionStorage.setItem("uuid", JSON.parse(this.responseText).id);
+        sessionStorage.setItem(
+          "access-token",
+          xhrLogin.getResponseHeader("access-token")
+        );
+      };
+      that.setState({
+        loggedIn: true,
+      });
+
+      that.closeModalHandler();
+    }
+  );
+
+  xhrLogin.open("POST", this.props.baseUrl + "auth/login");
+  xhrLogin.setRequestHeader(
+    "Authorization",
+    "Basic " +
+      window.btoa(this.state.username + ":" + this.state.loginPassword)
+  );
+  xhrLogin.setRequestHeader("Content-Type", "application/json");
+  xhrLogin.setRequestHeader("Cache-Control", "no-cache");
+  xhrLogin.send(dataLogin);
+};
 
   inputUsernameChangeHandler = (e) => {
     this.setState({ username: e.target.value });
@@ -117,7 +145,27 @@ constructor() {
       ? this.setState({ contactRequired: "dispBlock" })
       : this.setState({ contactRequired: "dispNone" });
       (this.state.firstname !== ""&&this.state.lastname !== ""&&this.state.email !== ""&&this.state.registerPassword !== ""&& this.state.contact !== "")?this.setState({login:"dispBlock"}):(this.setState({login:"dispNone"}));
+    
+    let registerPayload = {
+      email_address: this.state.lastname,
+      first_name: this.state.firstname,
+      last_name: this.state.lastname,
+      mobile_number: this.state.contact,
+      password: this.state.registerPassword,
     };
+    let requestOptions = {
+      method: "POST",
+      
+      body: JSON.stringify(registerPayload),
+    };
+    fetch("http://localhost:8085/api/v1/signup/", requestOptions)
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          registrationSuccess: true,
+        })
+      );
+  };
   inputFirstNameChangeHandler = (e) => {
     this.setState({ firstname: e.target.value });
   };
@@ -133,6 +181,15 @@ constructor() {
   inputContactChangeHandler = (e) => {
     this.setState({ contact: e.target.value });
   }; 
+  logoutHandler = (e) => {
+    sessionStorage.removeItem("uuid");
+    sessionStorage.removeItem("access-token");
+
+    this.setState({
+      loggedIn: false,
+    });
+  };
+
  render(){
 return(
   <div>
@@ -170,7 +227,7 @@ return(
           </Tabs>
           {this.state.value === 0 && (
             <TabContainer>
-              <FormControl required>
+              <FormControl required >
                 <InputLabel htmlFor="username">Username</InputLabel>
                 <Input
                   id="username"
@@ -295,6 +352,6 @@ return(
       </div></div>
     );        
     }
-  }
+  };
 export default Header;
   

@@ -15,6 +15,26 @@
     animation: name 8s linear infinite;
     position: relative;
     }
+    .login-button{
+      float:right;
+      margin-right:20px;
+    }
+
+    .tabs {
+      margin-bottom: 20px;
+  }
+  
+  .dispNone {
+      display: none;
+  }
+  
+  .dispBlock {
+      display: block;
+  }
+  
+  .red {
+      color: red;
+  }
     @keyframes name {
         from {
             transform: rotate(0deg);
@@ -23,8 +43,4 @@
             transform: rotate(360deg);
           }
         }
-        .login-button{
-         float:right;
-         margin-right:20px;
-         
-        }
+        
