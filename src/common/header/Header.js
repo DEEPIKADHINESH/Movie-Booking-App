@@ -188,7 +188,7 @@ constructor() {
     this.setState({
       loggedIn: false,
     });
-  };
+  }
 
  render(){
 return(
