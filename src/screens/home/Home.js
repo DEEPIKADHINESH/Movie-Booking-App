@@ -20,7 +20,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-//import genre from "../../common/genre";
 import artists from "../../common/artists";
 import genres from '../../common/genre';
 import Details from '../details/Details.js';
@@ -57,7 +56,6 @@ const styles = theme => ({
     color: theme.palette.primary.light,
   }
 });
-
 class Home extends Component {
   constructor() {
     super();
@@ -97,8 +95,6 @@ class Home extends Component {
   movieClickHandler = (movieId) => {
     ReactDOM.render(<Details movieId={movieId} />, document.getElementById('root'));
   }
-
-
   render() {
     const { classes } = this.props;
     var filterMovie = moviesData.filter((movie) => {
@@ -107,12 +103,10 @@ class Home extends Component {
     if (this.state.movieName.length === 0 && this.state.artists.length === 0) {
       filterMovie = moviesData;
     }
-
-
     return (
       <div>
         <Header baseUrl={this.props.baseU} />
-        <div id="upcomeing">
+        <div id="upcoming">
           <span>Upcoming Movies</span>
         </div>
         <div>
@@ -161,7 +155,7 @@ class Home extends Component {
                 <FormControl className={classes.formControl}>
                   <Typography className={classes.title} color="textSecondary">
                     FIND MOVIES BY:
-                                              </Typography>
+                  </Typography>
                 </FormControl>
 
                 <FormControl className={classes.formControl}>
@@ -230,7 +224,7 @@ class Home extends Component {
                 <br /><br />
                 <FormControl className={classes.formControl}>
                   <Button variant="contained" color="primary">
-                                    APPLY
+                    APPLY
       </Button>
                 </FormControl>
               </CardContent>
